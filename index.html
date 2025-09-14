@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bharathanatyam : The Art of Expressions</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            line-height: 1.7;
+            background: linear-gradient(135deg, #2d1e2f 0%, #f7c873 100%);
+            color: #2d1e2f;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* --- Navigation Bar --- */
+        .navbar {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            background: rgba(45, 30, 47, 0.7); /* More transparent */
+            padding: 8px 0; /* Smaller height */
+            z-index: 1000;
+            transition: background 0.3s;
+            box-shadow: 0 2px 12px rgba(45,30,47,0.10);
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar.scrolled {
+            background: linear-gradient(90deg, #a83279 0%, #d38312 100%);
+            box-shadow: 0 4px 16px rgba(45,30,47,0.25);
+        }
+
+        .logo {
+            font-size: 1.1em; /* Smaller logo text */
+            font-family: 'Dancing Script', cursive, serif;
+            font-weight: bold;
+            color: #f7c873;
+            letter-spacing: 2px;
+            text-shadow: 1px 1px 8px #a83279;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+        }
+
+        .navbar ul li {
+            margin-left: 28px;
+        }
+
+        .navbar ul li a {
+            color: #f7c873;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1em; /* Slightly smaller nav links */
+            letter-spacing: 1px;
+            transition: color 0.3s;
+            padding-bottom: 1px;
+            border-bottom: 2px solid transparent;
+        }
+
+        .navbar ul li a:hover {
+            color: #a83279;
+            border-bottom: 2px solid #a83279;
+        }
+
+        /* --- Hero Section --- */
+        .hero-section {
+            height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background-image: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url('bharatanatyam_bg.jpg');
+            background-size: auto 100%;      /* Fit image to height, keep aspect ratio */
+            background-repeat: no-repeat;    /* Prevent tiling */
+            background-position: center;     /* Center the image */
+            background-color: #2d1e2f;       /* Fills left/right with background color */
+            color: #fff;
+            margin-bottom: 60px;
+            box-shadow: 0 8px 32px rgba(45,30,47,0.18);
+            position: relative;
+            overflow: hidden;
+            padding-top: 60px; /* Add padding so heading is not hidden */
+        }
+
+        .hero-section .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-section h1 {
+            font-size: 3.5em;
+            font-family: 'Dancing Script', cursive, serif;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #f7c873;
+            text-shadow: 2px 2px 12px #a83279, 0 0 8px #2d1e2f;
+        }
+
+        .hero-section p {
+            font-size: 1.3em;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            line-height: 1.8;
+            color: #fffbe7;
+            text-shadow: 1px 1px 6px #a83279;
+        }
+
+        .hero-section .button {
+            display: inline-block;
+            background: linear-gradient(90deg, #a83279 0%, #f7c873 100%);
+            color: #2d1e2f;
+            padding: 14px 36px;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.1em;
+            box-shadow: 0 2px 8px rgba(168,50,121,0.18);
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .hero-section .button:hover {
+            background: linear-gradient(90deg, #d38312 0%, #a83279 100%);
+            color: #fff;
+        }
+
+        .background-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 6vw;
+            color: rgba(255, 215, 0, 0.25); /* golden transparent */
+            white-space: nowrap;
+            pointer-events: none;
+            z-index: 0;
+            font-family: 'Dancing Script', cursive, serif;
+            text-shadow: 3px 3px 15px #000;
+            font-weight: bold;
+            letter-spacing: 3px;
+        }
+
+        /* --- Gallery Section --- */
+        #gallery {
+            padding: 80px 0;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(2px);
+        }
+
+        #gallery h2 {
+            font-size: 2.7em;
+            text-align: center;
+            margin-bottom: 40px;
+            /* color: #a83279; */ /* Remove old pink */
+            color: #1a1a40; /* Deep indigo for power and elegance */
+            font-family: 'Dancing Script', cursive, serif;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 12px #f7c873, 0 0 8px #000; /* Add a golden glow for power */
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+            padding: 0 20px;
+        }
+
+        .gallery-item {
+            overflow: hidden;
+            border-radius: 16px;
+            box-shadow: 0 6px 18px rgba(168,50,121,0.13);
+            background: linear-gradient(135deg, #f7c873 0%, #a83279 100%);
+            border: 2px solid #a83279; /* Beautiful deep magenta border */
+            transition: transform 0.3s, box-shadow 0.3s, border 0.3s;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.04) rotate(-1deg);
+            box-shadow: 0 12px 32px rgba(168,50,121,0.22);
+            border: 2.5px solid #1a1a40; /* Dark indigo border on hover */
+        }
+
+        .gallery-item img {
+            display: block;
+            width: 100%;
+            height: 350px;
+            object-fit: contain;
+            border-radius: 16px 16px 0 0;
+            transition: filter 0.3s;
+            filter: grayscale(10%) contrast(1.08);
+            background: transparent; /* Remove white background */
+        }
+
+        .gallery-item img:hover {
+            filter: none;
+        }
+
+        .gallery-caption {
+            padding: 18px 10px 14px 10px;
+            font-size: 1.1em;
+            color: #a83279;
+            font-family: 'Georgia', serif;
+            background: #fffbe7;
+            border-radius: 0 0 16px 16px;
+            text-align: center;
+            min-height: 48px;
+        }
+
+        /* --- About Section --- */
+        #about {
+            padding: 80px 0;
+            background: linear-gradient(90deg, #f7c873 0%, #fffbe7 100%);
+        }
+
+        #about h2 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            color: #a83279;
+            text-align: center;
+            font-family: 'Dancing Script', cursive, serif;
+        }
+
+        #about .container > p {
+            max-width: 800px;
+            margin: 0 auto 30px;
+            color: #2d1e2f;
+            line-height: 1.8;
+            text-align: center;
+            font-size: 1.15em;
+        }
+
+        .about-details {
+            display: flex;
+            justify-content: space-around;
+            align-items: stretch;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .about-details div {
+            flex: 1 1 300px;
+            margin: 20px;
+            padding: 36px 28px;
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 2px 12px rgba(168,50,121,0.10);
+            text-align: center;
+            border: 2px solid #f7c873;
+            transition: box-shadow 0.3s, border 0.3s;
+        }
+
+        .about-details div:hover {
+            box-shadow: 0 8px 32px rgba(168,50,121,0.18);
+            border: 2px solid #a83279;
+        }
+
+        .about-details h3 {
+            font-size: 1.5em;
+            color: #a83279;
+            margin-bottom: 15px;
+            font-family: 'Dancing Script', cursive, serif;
+        }
+
+        .about-details p {
+            color: #2d1e2f;
+            font-size: 1.08em;
+        }
+
+        /* --- Contact Section --- */
+        #contact {
+            padding: 80px 0;
+            background: linear-gradient(90deg, #a83279 0%, #f7c873 100%);
+            text-align: center;
+        }
+
+        #contact h2 {
+            font-size: 2.5em;
+            color: #fffbe7;
+            margin-bottom: 30px;
+            font-family: 'Dancing Script', cursive, serif;
+        }
+
+        #contact p {
+            color: #fffbe7;
+            margin-bottom: 20px;
+            font-size: 1.15em;
+        }
+
+        .contact-info {
+            margin-top: 30px;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background: #2d1e2f;
+            color: #f7c873;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 1em;
+            letter-spacing: 1px;
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 900px) {
+            .about-details {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .about-details div {
+                margin: 18px 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar .container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .navbar nav {
+                margin-top: 15px;
+            }
+
+            .navbar ul {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .navbar ul li {
+                margin: 10px 0;
+            }
+
+            .hero-section h1 {
+                font-size: 2.2em;
+            }
+
+            .hero-section p {
+                font-size: 1em;
+            }
+
+            .about-details {
+                flex-direction: column;
+            }
+            .gallery-item img {
+                height: 220px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="container">
+            <div class="logo">Bharathanatyam : The Art of Expressions</div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero-section">
+            <!-- <div class="background-text">Capturing the Soul of Bharatanatyam</div> -->
+            <div class="container">
+                <h1>Capturing the Soul of Bharatanatyam</h1>
+                <p>
+                    I am a passionate Bharatanatyam dancer, and through this portfolio, I present a collection of beautiful and expressive Bharatanatyam poses. Each pose reflects the grace, tradition, and storytelling that make this classical dance form so mesmerizing.
+                </p>
+                <a href="#gallery" class="button">View Poses</a>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section id="gallery">
+            <h2>Bharatanatyam Poses Gallery</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="1.jpg" alt="Pose 1">
+                    <div class="gallery-caption">Her hands reach for the sky, showing a deep connection to the divine.</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="2.jpg" alt="Pose 2">
+                    <div class="gallery-caption">A gentle look and folded hands express a quiet, thoughtful emotion.</div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="4.jpg" alt="Pose 4">
+                    <div class="gallery-caption">Her focused eyes and delicate finger placement tell a silent, beautiful story.</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="5.jpg" alt="Pose 5">
+                    <div class="gallery-caption">She stands strong and centered, showing perfect balance and dedication.</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="6.jpg" alt="Pose 6">
+                    <div class="gallery-caption">Many arms spread out like a fan, capturing the powerful energy of a celestial being.</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="7.jpg" alt="Pose 7">
+                    <div class="gallery-caption">She crouches with vibrant energy, ready to spring into action.</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="8.jpg" alt="Pose 8">
+                    <div class="gallery-caption">Two dancers become one, representing the beautiful harmony of masculine and feminine forces.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about">
+            <div class="container">
+                <h2>About My Bharatanatyam Journey</h2>
+                <p>
+                    Bharatanatyam is not just a dance form for me—it's a way to express stories, emotions, and the beauty of Indian culture. Each pose and movement is a blend of discipline, devotion, and artistry. Through my performances and these photographs, I hope to share the timeless elegance and expressive power of Bharatanatyam with the world.
+                </p>
+                <div class="about-details">
+                    <div>
+                        <h3>My Inspiration</h3>
+                        <p>
+                            Inspired by the ancient temple dancers of South India, I strive to bring their legacy to life through every pose and expression.
+                        </p>
+                    </div>
+                    <div>
+                        <h3>My Practice</h3>
+                        <p>
+                            Years of dedicated practice have helped me master the intricate mudras, abhinaya (expressions), and rhythmic footwork that define Bharatanatyam.
+                        </p>
+                    </div>
+                    <div>
+                        <h3>My Vision</h3>
+                        <p>
+                            To inspire others to appreciate the beauty of Bharatanatyam and to keep this classical art form alive for generations to come.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact">
+            <div class="container">
+                <h2>Get in Touch</h2>
+                <p>
+                    If you are interested in Bharatanatyam, want to collaborate, or simply wish to know more about this beautiful dance form, feel free to reach out!
+                </p>
+                <div class="contact-info">
+                    <!-- You can add email or social links here -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Bharatanatyam Photography Portfolio. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navbar = document.querySelector('.navbar');
+
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
